@@ -37,10 +37,11 @@ struct DashboardView: View {
 struct CurrentBillCard: View {
     let bill: Bill
     let previous: Bill?
+    var isCurrent: Bool = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Current bill · \(Formatters.period(bill))")
+            Text("\(isCurrent ? "Current bill" : "Bill") · \(Formatters.period(bill))")
                 .font(.caption).foregroundStyle(.secondary)
             HStack(alignment: .firstTextBaseline) {
                 Text(Formatters.currency(bill.total)).font(.system(size: 40, weight: .bold, design: .rounded))
@@ -124,7 +125,12 @@ struct DailyUsageChart: View {
                 .foregroundStyle(.yellow.gradient)
         }
         .chartYAxisLabel("kWh")
-        .chartXAxis { AxisMarks(values: .stride(by: .day, count: 7)) }
+        .chartXAxis {
+            AxisMarks(values: .stride(by: .day, count: 7)) { _ in
+                AxisGridLine()
+                AxisValueLabel(format: .dateTime.month(.abbreviated).day(), collisionResolution: .greedy)
+            }
+        }
     }
 }
 

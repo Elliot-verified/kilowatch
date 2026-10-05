@@ -17,7 +17,12 @@ struct BillsListView: View {
                 .chartForegroundStyleScale(
                     domain: ChargeCategory.allCases.map(\.title),
                     range: ChargeCategory.allCases.map(\.color))
-                .chartXAxis { AxisMarks(values: .stride(by: .month, count: 2)) }
+                .chartXAxis {
+                    AxisMarks(values: .stride(by: .month, count: 2)) { _ in
+                        AxisGridLine()
+                        AxisValueLabel(format: .dateTime.month(.abbreviated))
+                    }
+                }
                 .frame(height: 180)
                 .padding(.vertical, 4)
             }

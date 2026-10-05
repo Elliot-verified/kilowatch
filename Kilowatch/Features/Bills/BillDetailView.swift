@@ -9,7 +9,8 @@ struct BillDetailView: View {
     var body: some View {
         List {
             Section {
-                CurrentBillCard(bill: bill, previous: model.previousBill(before: bill))
+                CurrentBillCard(bill: bill, previous: model.previousBill(before: bill),
+                                isCurrent: bill.id == model.currentBill?.id)
             }
             Section("What changed") {
                 ForEach(model.insights(for: bill)) { InsightRow(insight: $0) }
