@@ -32,29 +32,9 @@ enum SampleData {
     }()
 
     static func makeBill(start: Date, end: Date, kWh: Double, supplyRate: Double, estimated: Bool = false) -> Bill {
-        let deliveryRate = 0.1562
-        let supply = kWh * supplyRate
-        let merchantFunction = kWh * 0.0041
-        let basic = 20.14
-        let deliveryKWh = kWh * deliveryRate
-        let systemBenefit = kWh * 0.0067
-        let subtotal = supply + merchantFunction + basic + deliveryKWh + systemBenefit
-        let grt = subtotal * 0.0245
-        let salesTax = (subtotal + grt) * 0.045
-        var charges: [BillCharge] = [
-            BillCharge(name: "Electricity supply", category: .supply, amount: supply,
-                       detail: "\(Int(kWh)) kWh @ \(Formatters.cents(supplyRate))"),
-            BillCharge(name: "Merchant function charge", category: .supply, amount: merchantFunction,
-                       detail: "Cost of buying power on your behalf"),
-            BillCharge(name: "Basic service charge", category: .delivery, amount: basic,
-                       detail: "Fixed monthly charge for your meter and account"),
-            BillCharge(name: "Delivery charge", category: .delivery, amount: deliveryKWh,
-                       detail: "\(Int(kWh)) kWh @ \(Formatters.cents(deliveryRate))"),
-            BillCharge(name: "System benefit charge", category: .delivery, amount: systemBenefit,
-                       detail: "Funds state efficiency and clean-energy programs"),
-            BillCharge(name: "GRT surcharge", category: .taxesAndFees, amount: grt, detail: "2.45% gross receipts tax"),
-            BillCharge(name: "NYC sales tax", category: .taxesAndFees, amount: salesTax, detail: "4.5%"),
-        ]
+        var rates = ConEdRateModel.residential
+        rates.supplyRatePerKWh = supplyRate
+        var charges = rates.charges(kWh: kWh)
         if estimated {
             charges.append(BillCharge(name: "Estimated reading", category: .adjustments, amount: 0,
                                       detail: "Meter was not read this period"))

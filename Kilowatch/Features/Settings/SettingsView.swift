@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject private var model: AppModel
     @State private var confirmingUnlink = false
+    @State private var showingImporter = false
 
     var body: some View {
         Form {
@@ -13,6 +14,26 @@ struct SettingsView: View {
                     LabeledContent("Service address", value: account.serviceAddress)
                     Button("Disconnect account", role: .destructive) { confirmingUnlink = true }
                 }
+            }
+
+            Section {
+                if let imported = model.importedFile {
+                    LabeledContent("File", value: imported.sourceFileName)
+                    if let first = imported.firstDate, let last = imported.lastDate {
+                        LabeledContent("Covers", value: "\(Formatters.shortDate(first)) – \(Formatters.shortDate(last))")
+                    }
+                    LabeledContent("Readings", value: "\(imported.intervals.count)")
+                }
+                Button {
+                    showingImporter = true
+                } label: {
+                    Label(model.importedFile == nil ? "Import a Green Button file" : "Replace with another file",
+                          systemImage: "square.and.arrow.down")
+                }
+            } header: {
+                Text("Data")
+            } footer: {
+                Text("Download your usage from coned.com under Usage → Download My Data (CSV or XML). Green Button files contain usage, not line items, so charge breakdowns are estimated from Con Edison's standard residential rates.")
             }
 
             Section {
@@ -41,6 +62,7 @@ struct SettingsView: View {
             }
         }
         .navigationTitle("Settings")
+        .greenButtonImporter(isPresented: $showingImporter)
         .confirmationDialog("Disconnect your Con Edison account?", isPresented: $confirmingUnlink, titleVisibility: .visible) {
             Button("Disconnect", role: .destructive) { Task { await model.unlinkAccount() } }
         } message: {

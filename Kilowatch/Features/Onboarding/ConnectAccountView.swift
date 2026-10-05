@@ -1,8 +1,10 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 /// First-run screen. Explains what linking does and kicks off the flow.
 struct ConnectAccountView: View {
     @EnvironmentObject private var model: AppModel
+    @State private var showingImporter = false
 
     var body: some View {
         VStack(spacing: 28) {
@@ -48,8 +50,19 @@ struct ConnectAccountView: View {
             .buttonStyle(.borderedProminent)
             .disabled(model.linkState == .linking)
             .padding(.horizontal)
+
+            Button {
+                showingImporter = true
+            } label: {
+                Label("Import a Green Button file", systemImage: "square.and.arrow.down")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+            }
+            .buttonStyle(.bordered)
+            .padding(.horizontal)
             .padding(.bottom)
         }
+        .greenButtonImporter(isPresented: $showingImporter)
     }
 
     private func bullet(_ symbol: String, _ text: String) -> some View {
@@ -62,4 +75,37 @@ struct ConnectAccountView: View {
 
 #Preview {
     ConnectAccountView().environmentObject(AppModel())
+}
+
+/// Shared file picker + error alert for Green Button imports.
+struct GreenButtonImporter: ViewModifier {
+    @EnvironmentObject private var model: AppModel
+    @Binding var isPresented: Bool
+
+    static let contentTypes: [UTType] = [.xml, .commaSeparatedText, .plainText, .data]
+
+    func body(content: Content) -> some View {
+        content
+            .fileImporter(isPresented: $isPresented, allowedContentTypes: Self.contentTypes) { result in
+                switch result {
+                case .success(let url):
+                    Task { await model.importGreenButton(from: url) }
+                case .failure(let error):
+                    model.importError = error.localizedDescription
+                }
+            }
+            .alert("Couldn't import that file", isPresented: Binding(
+                get: { model.importError != nil },
+                set: { if !$0 { model.importError = nil } })) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(model.importError ?? "")
+            }
+    }
+}
+
+extension View {
+    func greenButtonImporter(isPresented: Binding<Bool>) -> some View {
+        modifier(GreenButtonImporter(isPresented: isPresented))
+    }
 }

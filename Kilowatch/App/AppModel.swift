@@ -19,14 +19,24 @@ final class AppModel: ObservableObject {
     @Published var privacy = PrivacySettings() {
         didSet { Task { await pushPrivacy() } }
     }
+    /// Set when a Green Button import fails; the UI shows it in an alert.
+    @Published var importError: String?
+    @Published private(set) var importedFile: GreenButtonImport?
 
-    private let utility: UtilityDataProvider
+    private var utility: UtilityDataProvider
+    private let defaultUtility: UtilityDataProvider
     private let comparisons: ComparisonService
 
     init(utility: UtilityDataProvider = MockUtilityDataProvider(),
-         comparisons: ComparisonService = MockComparisonService()) {
+         comparisons: ComparisonService = MockComparisonService(),
+         restoreImport: Bool = true) {
         self.utility = utility
+        self.defaultUtility = utility
         self.comparisons = comparisons
+        if restoreImport, let saved = ImportStore.load() {
+            adopt(saved)
+            Task { await refresh() }
+        }
     }
 
     var account: UtilityAccount? {
@@ -65,8 +75,37 @@ final class AppModel: ObservableObject {
         }
     }
 
+    /// Reads a Green Button file (CSV or ESPI XML) the user picked, and
+    /// switches the app to that data. Replaces any previous import.
+    func importGreenButton(from url: URL) async {
+        importError = nil
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        do {
+            let data = try Data(contentsOf: url)
+            let name = url.lastPathComponent
+            let parsed = try await Task.detached(priority: .userInitiated) {
+                try GreenButtonParser.parse(data: data, fileName: name)
+            }.value
+            try ImportStore.save(parsed)
+            adopt(parsed)
+            await refresh()
+        } catch {
+            importError = error.localizedDescription
+        }
+    }
+
+    private func adopt(_ imported: GreenButtonImport) {
+        let provider = ImportedUtilityDataProvider(imported: imported)
+        utility = provider
+        importedFile = imported
+        linkState = .linked(provider.account)
+    }
+
     func unlinkAccount() async {
         if let account { try? await utility.unlink(account) }
+        utility = defaultUtility
+        importedFile = nil
         linkState = .notLinked
         bills = []
         dailyUsage = []

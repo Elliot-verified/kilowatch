@@ -31,7 +31,7 @@ struct BillsListView: View {
                     NavigationLink { BillDetailView(bill: bill) } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(Formatters.monthYear(bill.periodEnd)).font(.body)
+                                Text(Formatters.billMonth(bill)).font(.body)
                                 Text("\(Formatters.kWh(bill.kWh)) · \(Formatters.period(bill))")
                                     .font(.caption).foregroundStyle(.secondary)
                             }

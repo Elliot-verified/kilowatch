@@ -50,7 +50,15 @@ Con Edison has no public API for customers. Options, in order of preference:
 
 1. **Con Edison Share My Data (Green Button Connect My Data)** — the OAuth-style flow NY utilities offer to authorized third parties. Requires registering Kilowatch with Con Edison. Gives bills and 15-minute interval data without ever handling credentials. Needs verification of current program status and onboarding time.
 2. **Utility data aggregator** (UtilityAPI, Arcadia) — hosted connection to Con Edison, faster to launch, per-account cost.
-3. **Green Button Download My Data** — user exports a file from their Con Edison account and imports it. Zero integration work, worst UX. Useful as a fallback or for a demo.
+3. **Green Button Download My Data** — **built.** The user exports a file from coned.com (Usage → Download My Data) and imports it from the Connect screen or Settings. Works offline with no backend.
+
+### Green Button import
+`Kilowatch/Services/GreenButton/` handles both export formats:
+
+- **CSV** (`GreenButtonCSVParser`): Con Edison's `TYPE,DATE,START TIME,END TIME,USAGE,UNITS,COST,NOTES` layout, with the name/address/account preamble. Columns are matched by name, gas rows are skipped, daily reads without times are supported.
+- **ESPI XML** (`GreenButtonXMLParser`): the Atom feed. Readings are scaled by the ReadingType's power-of-ten multiplier; uom 72 is Wh; costs are in 1/100000 dollars; `ElectricPowerUsageSummary` gives billing periods and totals when present.
+
+Green Button files carry usage and sometimes a period total, never line items. `BillBuilder` groups intervals into billing periods (the file's own periods, or calendar months with at least 20 days of data) and `ConEdRateModel` produces a line-item breakdown from Con Edison's standard residential rate. When the file has a real total, the breakdown is scaled to match it. Such bills are flagged `chargesAreEstimated` and the UI says so. The last import is persisted in Application Support so the app reopens to it.
 
 Credential-based scraping is ruled out: it puts the customer's password in our hands and violates Con Edison's terms.
 

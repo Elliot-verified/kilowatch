@@ -10,21 +10,29 @@
 		04494FF648975A3B278F2F72 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D493522FDF7658AC7189C58 /* SampleData.swift */; };
 		059AB9BC47089C4DAA41C77F /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C5D989EC6C1B2E4AB28707 /* CompareView.swift */; };
 		08D385638E78922B57067B07 /* KilowatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738AAB6B6211BD8AFC5040E /* KilowatchApp.swift */; };
+		09D39A802B669EA1E071E60F /* GreenButtonImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F4D2E9B29A0409D255645 /* GreenButtonImport.swift */; };
+		0E95544DD4144153AA498E3B /* ConEdRateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A779E9CC265E3C431B4F8A4 /* ConEdRateModel.swift */; };
+		1759EE32243D388F82980CD0 /* ImportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7455BC299E2C4851E77C23E8 /* ImportStore.swift */; };
 		18709EB19CA58CE284FA3456 /* BillDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F524374EE8D7628679F508 /* BillDetailView.swift */; };
+		1A707ECCA8C593253379A517 /* GreenButtonXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7177941BA8C23A49ED7F7227 /* GreenButtonXMLParser.swift */; };
 		38974F46782A8363927902FD /* BillExplainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673389571FA14BB6195A9701 /* BillExplainerTests.swift */; };
 		3F38920BE2747D54E648D743 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096CB21F07AA6CDB8F1787B4 /* Formatters.swift */; };
 		43A940CAD4277875C5DC287A /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD706A38A80620985DBBD112 /* DashboardView.swift */; };
 		4B968206DB76981513087F94 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D560D63A7970FDA51F61395 /* SettingsView.swift */; };
 		61B8974EAC19A1833FBCE01E /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A22043AC7C296C146FA03F8 /* Bill.swift */; };
+		63965D67F30DFD3A776AEDD2 /* ImportedUtilityDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2017D45B303C27EEFA72904 /* ImportedUtilityDataProvider.swift */; };
 		864D845DAA3FF3438677237C /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6BC0AF55637449A5F2AD88 /* AppModel.swift */; };
 		88CCB65E02EFCE72F94871BD /* ComparisonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17EBB47E628281D42CC3E3D /* ComparisonService.swift */; };
 		8BAEB15558E58823341F3E06 /* UtilityDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA056EF2FB8C1622BDCBE0A7 /* UtilityDataProvider.swift */; };
 		920156AB55E6ABED4B740380 /* BillsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFEDAA16FCAC08618D35A57 /* BillsListView.swift */; };
 		93D203C5DC2AA05CE3982EA0 /* ConnectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD7B78669F682A1457D62F /* ConnectAccountView.swift */; };
 		9872B476DB63EA4569DDA28B /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1115F019B83691C679F119 /* Insight.swift */; };
+		A00CE504A8E806453FD3A032 /* GreenButtonParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFDA9A7B610AA6576DFAD63 /* GreenButtonParserTests.swift */; };
 		D61914F58C41196C1B2EBEAB /* UtilityAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FFF6B186116E9E4815A882 /* UtilityAccount.swift */; };
 		F3426059E2A2F31DAB21BAF6 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCC867299F1AB1F3465595B /* Comparison.swift */; };
+		F4A64392E117874405B4821D /* BillBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0000E21C7A909CBA83F81 /* BillBuilder.swift */; };
 		FC522383EA3C09E2A4592F52 /* UsageInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA97A771B98912C6B264077B /* UsageInterval.swift */; };
+		FE415363D993A65B4F24CC11 /* GreenButtonCSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9621864F41B25E503819F73 /* GreenButtonCSVParser.swift */; };
 		FF80BD186F7EC84CD2834825 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287CADDA6E9A28756041D9C /* RootView.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,8 +55,11 @@
 		32F524374EE8D7628679F508 /* BillDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillDetailView.swift; sourceTree = "<group>"; };
 		42FFF6B186116E9E4815A882 /* UtilityAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityAccount.swift; sourceTree = "<group>"; };
 		46ADEF9DAD615504569853C2 /* Kilowatch.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Kilowatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A779E9CC265E3C431B4F8A4 /* ConEdRateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConEdRateModel.swift; sourceTree = "<group>"; };
 		5D560D63A7970FDA51F61395 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		673389571FA14BB6195A9701 /* BillExplainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillExplainerTests.swift; sourceTree = "<group>"; };
+		7177941BA8C23A49ED7F7227 /* GreenButtonXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButtonXMLParser.swift; sourceTree = "<group>"; };
+		7455BC299E2C4851E77C23E8 /* ImportStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportStore.swift; sourceTree = "<group>"; };
 		7CFEDAA16FCAC08618D35A57 /* BillsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsListView.swift; sourceTree = "<group>"; };
 		8A22043AC7C296C146FA03F8 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		8D493522FDF7658AC7189C58 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
@@ -57,8 +68,13 @@
 		BCCC867299F1AB1F3465595B /* Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
 		BD706A38A80620985DBBD112 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		CA056EF2FB8C1622BDCBE0A7 /* UtilityDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityDataProvider.swift; sourceTree = "<group>"; };
+		D2017D45B303C27EEFA72904 /* ImportedUtilityDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedUtilityDataProvider.swift; sourceTree = "<group>"; };
+		DBE0000E21C7A909CBA83F81 /* BillBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillBuilder.swift; sourceTree = "<group>"; };
+		E9621864F41B25E503819F73 /* GreenButtonCSVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButtonCSVParser.swift; sourceTree = "<group>"; };
 		EA97A771B98912C6B264077B /* UsageInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageInterval.swift; sourceTree = "<group>"; };
+		EAFDA9A7B610AA6576DFAD63 /* GreenButtonParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButtonParserTests.swift; sourceTree = "<group>"; };
 		ED1115F019B83691C679F119 /* Insight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insight.swift; sourceTree = "<group>"; };
+		F22F4D2E9B29A0409D255645 /* GreenButtonImport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButtonImport.swift; sourceTree = "<group>"; };
 		F738AAB6B6211BD8AFC5040E /* KilowatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KilowatchApp.swift; sourceTree = "<group>"; };
 		FE6BC0AF55637449A5F2AD88 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,7 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				A17EBB47E628281D42CC3E3D /* ComparisonService.swift */,
+				D2017D45B303C27EEFA72904 /* ImportedUtilityDataProvider.swift */,
 				CA056EF2FB8C1622BDCBE0A7 /* UtilityDataProvider.swift */,
+				A5840CEC0EA8E20363FF064C /* GreenButton */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -135,6 +153,19 @@
 				5D560D63A7970FDA51F61395 /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		A5840CEC0EA8E20363FF064C /* GreenButton */ = {
+			isa = PBXGroup;
+			children = (
+				DBE0000E21C7A909CBA83F81 /* BillBuilder.swift */,
+				4A779E9CC265E3C431B4F8A4 /* ConEdRateModel.swift */,
+				E9621864F41B25E503819F73 /* GreenButtonCSVParser.swift */,
+				F22F4D2E9B29A0409D255645 /* GreenButtonImport.swift */,
+				7177941BA8C23A49ED7F7227 /* GreenButtonXMLParser.swift */,
+				7455BC299E2C4851E77C23E8 /* ImportStore.swift */,
+			);
+			path = GreenButton;
 			sourceTree = "<group>";
 		};
 		A59FC3278570C59F0C7BC989 = {
@@ -192,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				673389571FA14BB6195A9701 /* BillExplainerTests.swift */,
+				EAFDA9A7B610AA6576DFAD63 /* GreenButtonParserTests.swift */,
 			);
 			path = KilowatchTests;
 			sourceTree = "<group>";
@@ -270,14 +302,21 @@
 			files = (
 				864D845DAA3FF3438677237C /* AppModel.swift in Sources */,
 				61B8974EAC19A1833FBCE01E /* Bill.swift in Sources */,
+				F4A64392E117874405B4821D /* BillBuilder.swift in Sources */,
 				18709EB19CA58CE284FA3456 /* BillDetailView.swift in Sources */,
 				920156AB55E6ABED4B740380 /* BillsListView.swift in Sources */,
 				059AB9BC47089C4DAA41C77F /* CompareView.swift in Sources */,
 				F3426059E2A2F31DAB21BAF6 /* Comparison.swift in Sources */,
 				88CCB65E02EFCE72F94871BD /* ComparisonService.swift in Sources */,
+				0E95544DD4144153AA498E3B /* ConEdRateModel.swift in Sources */,
 				93D203C5DC2AA05CE3982EA0 /* ConnectAccountView.swift in Sources */,
 				43A940CAD4277875C5DC287A /* DashboardView.swift in Sources */,
 				3F38920BE2747D54E648D743 /* Formatters.swift in Sources */,
+				FE415363D993A65B4F24CC11 /* GreenButtonCSVParser.swift in Sources */,
+				09D39A802B669EA1E071E60F /* GreenButtonImport.swift in Sources */,
+				1A707ECCA8C593253379A517 /* GreenButtonXMLParser.swift in Sources */,
+				1759EE32243D388F82980CD0 /* ImportStore.swift in Sources */,
+				63965D67F30DFD3A776AEDD2 /* ImportedUtilityDataProvider.swift in Sources */,
 				9872B476DB63EA4569DDA28B /* Insight.swift in Sources */,
 				08D385638E78922B57067B07 /* KilowatchApp.swift in Sources */,
 				FF80BD186F7EC84CD2834825 /* RootView.swift in Sources */,
@@ -294,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38974F46782A8363927902FD /* BillExplainerTests.swift in Sources */,
+				A00CE504A8E806453FD3A032 /* GreenButtonParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,12 +441,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwaxman.KilowatchTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwaxman.kilowatch.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kilowatch.app/Kilowatch";
@@ -417,12 +458,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwaxman.KilowatchTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwaxman.kilowatch.tests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kilowatch.app/Kilowatch";

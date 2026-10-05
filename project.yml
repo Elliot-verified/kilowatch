@@ -31,5 +31,9 @@ targets:
     platform: iOS
     sources:
       - KilowatchTests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.elliotwaxman.kilowatch.tests
     dependencies:
       - target: Kilowatch

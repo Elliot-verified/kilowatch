@@ -37,6 +37,13 @@ enum Formatters {
         date.formatted(.dateTime.month(.wide).year())
     }
 
+    /// The month a bill "belongs to": the one containing the middle of its period,
+    /// so a Sep 1 – Oct 1 bill is September and a Sep 5 – Oct 5 bill is still September.
+    static func billMonth(_ bill: Bill) -> String {
+        let mid = bill.periodStart.addingTimeInterval(bill.periodEnd.timeIntervalSince(bill.periodStart) / 2)
+        return monthYear(mid)
+    }
+
     static func period(_ bill: Bill) -> String {
         "\(shortDate(bill.periodStart)) – \(shortDate(bill.periodEnd))"
     }

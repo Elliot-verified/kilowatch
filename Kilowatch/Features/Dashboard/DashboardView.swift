@@ -29,7 +29,7 @@ struct DashboardView: View {
                 }
             }
         }
-        .navigationTitle(model.account?.serviceAddress.components(separatedBy: ",").first ?? "Home")
+        .navigationTitle(model.account?.shortAddress ?? "Home")
         .refreshable { await model.refresh() }
     }
 }
@@ -41,7 +41,7 @@ struct CurrentBillCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("\(isCurrent ? "Current bill" : "Bill") · \(Formatters.period(bill))")
+            Text("\(isCurrent ? "Current bill" : "Bill") · \(Formatters.period(bill))\(bill.chargesAreEstimated ? " · charges estimated" : "")")
                 .font(.caption).foregroundStyle(.secondary)
             HStack(alignment: .firstTextBaseline) {
                 Text(Formatters.currency(bill.total)).font(.system(size: 40, weight: .bold, design: .rounded))

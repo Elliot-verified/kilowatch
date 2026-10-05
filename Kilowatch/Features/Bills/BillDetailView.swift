@@ -11,6 +11,11 @@ struct BillDetailView: View {
             Section {
                 CurrentBillCard(bill: bill, previous: model.previousBill(before: bill),
                                 isCurrent: bill.id == model.currentBill?.id)
+            } footer: {
+                if bill.chargesAreEstimated {
+                    Label("Usage is from your meter data. Line items are estimated from Con Edison's standard residential rates because Green Button files don't include charges.",
+                          systemImage: "info.circle")
+                }
             }
             Section("What changed") {
                 ForEach(model.insights(for: bill)) { InsightRow(insight: $0) }
@@ -49,7 +54,7 @@ struct BillDetailView: View {
                 }
             }
         }
-        .navigationTitle(Formatters.monthYear(bill.periodEnd))
+        .navigationTitle(Formatters.billMonth(bill))
         .navigationBarTitleDisplayMode(.inline)
     }
 

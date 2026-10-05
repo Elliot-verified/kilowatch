@@ -7,11 +7,14 @@ struct UsageInterval: Identifiable, Codable, Equatable {
     let start: Date
     let end: Date
     let kWh: Double
+    /// Dollars, when the source supplies a per-interval cost.
+    let cost: Double?
 
-    init(id: UUID = UUID(), start: Date, end: Date, kWh: Double) {
+    init(id: UUID = UUID(), start: Date, end: Date, kWh: Double, cost: Double? = nil) {
         self.id = id
         self.start = start
         self.end = end
         self.kWh = kWh
+        self.cost = cost
     }
 }

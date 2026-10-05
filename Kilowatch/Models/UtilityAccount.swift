@@ -10,4 +10,22 @@ struct UtilityAccount: Identifiable, Equatable, Codable {
     let serviceAddress: String
     let zip: String
     let linkedAt: Date
+
+    /// Street address only, title-cased, for use as a screen title.
+    /// "214 7TH AVE APT 3B BROOKLYN NY 11215" → "214 7th Ave".
+    var shortAddress: String {
+        var street = serviceAddress.components(separatedBy: ",").first ?? serviceAddress
+        for marker in [" APT", " UNIT", " FL ", " #", " STE"] {
+            if let r = street.range(of: marker, options: .caseInsensitive) { street = String(street[..<r.lowerBound]) }
+        }
+        street = street.trimmingCharacters(in: .whitespaces)
+        let words = street.split(separator: " ").map { w -> String in
+            let s = String(w)
+            // Keep ordinals like 7TH lowercase after the digits; title-case everything else.
+            if let first = s.first, first.isNumber { return s.lowercased() }
+            return s.capitalized
+        }
+        let result = words.joined(separator: " ")
+        return result.isEmpty ? "Home" : result
+    }
 }

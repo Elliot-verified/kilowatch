@@ -58,6 +58,8 @@ struct Bill: Identifiable, Codable, Equatable {
     let kWh: Double
     let charges: [BillCharge]
     let isEstimatedReading: Bool
+    /// True when line items were modelled from usage rather than read from the utility.
+    var chargesAreEstimated: Bool = false
 
     var total: Double { charges.reduce(0) { $0 + $1.amount } }
 
