@@ -1,0 +1,529 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04494FF648975A3B278F2F72 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D493522FDF7658AC7189C58 /* SampleData.swift */; };
+		059AB9BC47089C4DAA41C77F /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C5D989EC6C1B2E4AB28707 /* CompareView.swift */; };
+		08D385638E78922B57067B07 /* KilowatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738AAB6B6211BD8AFC5040E /* KilowatchApp.swift */; };
+		18709EB19CA58CE284FA3456 /* BillDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F524374EE8D7628679F508 /* BillDetailView.swift */; };
+		38974F46782A8363927902FD /* BillExplainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673389571FA14BB6195A9701 /* BillExplainerTests.swift */; };
+		3F38920BE2747D54E648D743 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096CB21F07AA6CDB8F1787B4 /* Formatters.swift */; };
+		43A940CAD4277875C5DC287A /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD706A38A80620985DBBD112 /* DashboardView.swift */; };
+		4B968206DB76981513087F94 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D560D63A7970FDA51F61395 /* SettingsView.swift */; };
+		61B8974EAC19A1833FBCE01E /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A22043AC7C296C146FA03F8 /* Bill.swift */; };
+		864D845DAA3FF3438677237C /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6BC0AF55637449A5F2AD88 /* AppModel.swift */; };
+		88CCB65E02EFCE72F94871BD /* ComparisonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17EBB47E628281D42CC3E3D /* ComparisonService.swift */; };
+		8BAEB15558E58823341F3E06 /* UtilityDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA056EF2FB8C1622BDCBE0A7 /* UtilityDataProvider.swift */; };
+		920156AB55E6ABED4B740380 /* BillsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFEDAA16FCAC08618D35A57 /* BillsListView.swift */; };
+		93D203C5DC2AA05CE3982EA0 /* ConnectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD7B78669F682A1457D62F /* ConnectAccountView.swift */; };
+		9872B476DB63EA4569DDA28B /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1115F019B83691C679F119 /* Insight.swift */; };
+		D61914F58C41196C1B2EBEAB /* UtilityAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FFF6B186116E9E4815A882 /* UtilityAccount.swift */; };
+		F3426059E2A2F31DAB21BAF6 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCC867299F1AB1F3465595B /* Comparison.swift */; };
+		FC522383EA3C09E2A4592F52 /* UsageInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA97A771B98912C6B264077B /* UsageInterval.swift */; };
+		FF80BD186F7EC84CD2834825 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0287CADDA6E9A28756041D9C /* RootView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		79DCB2EF8A79545F8D1D0CBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9D0A884EB249DC9D76F50AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85CB75037AFE8440833193D4;
+			remoteInfo = Kilowatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0287CADDA6E9A28756041D9C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		05C5D989EC6C1B2E4AB28707 /* CompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
+		096CB21F07AA6CDB8F1787B4 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		1F065BA4366AB18070437019 /* KilowatchTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KilowatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DAD7B78669F682A1457D62F /* ConnectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountView.swift; sourceTree = "<group>"; };
+		32F524374EE8D7628679F508 /* BillDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillDetailView.swift; sourceTree = "<group>"; };
+		42FFF6B186116E9E4815A882 /* UtilityAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityAccount.swift; sourceTree = "<group>"; };
+		46ADEF9DAD615504569853C2 /* Kilowatch.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Kilowatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D560D63A7970FDA51F61395 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		673389571FA14BB6195A9701 /* BillExplainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillExplainerTests.swift; sourceTree = "<group>"; };
+		7CFEDAA16FCAC08618D35A57 /* BillsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsListView.swift; sourceTree = "<group>"; };
+		8A22043AC7C296C146FA03F8 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
+		8D493522FDF7658AC7189C58 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		A17EBB47E628281D42CC3E3D /* ComparisonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonService.swift; sourceTree = "<group>"; };
+		B81BF90505464ED693753DED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BCCC867299F1AB1F3465595B /* Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
+		BD706A38A80620985DBBD112 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		CA056EF2FB8C1622BDCBE0A7 /* UtilityDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityDataProvider.swift; sourceTree = "<group>"; };
+		EA97A771B98912C6B264077B /* UsageInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageInterval.swift; sourceTree = "<group>"; };
+		ED1115F019B83691C679F119 /* Insight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insight.swift; sourceTree = "<group>"; };
+		F738AAB6B6211BD8AFC5040E /* KilowatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KilowatchApp.swift; sourceTree = "<group>"; };
+		FE6BC0AF55637449A5F2AD88 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0B97136D8CF5E53F138763F4 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				BF0853F40EE99B0EAE14C3F4 /* Bills */,
+				CE9AE1F9055B466FC169CCFD /* Compare */,
+				1FB143B1303299D4598735CF /* Dashboard */,
+				54B03C2AE93BEC0A75CA7BB4 /* Onboarding */,
+				55F2AC9E7334A65C707E71E0 /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		0C47242FA813FA60AFB2616C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				096CB21F07AA6CDB8F1787B4 /* Formatters.swift */,
+				8D493522FDF7658AC7189C58 /* SampleData.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		0CF352D07E5347FDC7E6C7A0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FE6BC0AF55637449A5F2AD88 /* AppModel.swift */,
+				F738AAB6B6211BD8AFC5040E /* KilowatchApp.swift */,
+				0287CADDA6E9A28756041D9C /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1EF4A8DAB1965329548CD2EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				46ADEF9DAD615504569853C2 /* Kilowatch.app */,
+				1F065BA4366AB18070437019 /* KilowatchTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1FB143B1303299D4598735CF /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				BD706A38A80620985DBBD112 /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		3BEAE78B29E40FF7DAB58934 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A17EBB47E628281D42CC3E3D /* ComparisonService.swift */,
+				CA056EF2FB8C1622BDCBE0A7 /* UtilityDataProvider.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		54B03C2AE93BEC0A75CA7BB4 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				2DAD7B78669F682A1457D62F /* ConnectAccountView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		55F2AC9E7334A65C707E71E0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5D560D63A7970FDA51F61395 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A59FC3278570C59F0C7BC989 = {
+			isa = PBXGroup;
+			children = (
+				D08039A66FF9493E357E6777 /* Kilowatch */,
+				D56A2DDA08BCF6258E00D736 /* KilowatchTests */,
+				1EF4A8DAB1965329548CD2EE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B443471BC9BE343270D03A19 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8A22043AC7C296C146FA03F8 /* Bill.swift */,
+				BCCC867299F1AB1F3465595B /* Comparison.swift */,
+				ED1115F019B83691C679F119 /* Insight.swift */,
+				EA97A771B98912C6B264077B /* UsageInterval.swift */,
+				42FFF6B186116E9E4815A882 /* UtilityAccount.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BF0853F40EE99B0EAE14C3F4 /* Bills */ = {
+			isa = PBXGroup;
+			children = (
+				32F524374EE8D7628679F508 /* BillDetailView.swift */,
+				7CFEDAA16FCAC08618D35A57 /* BillsListView.swift */,
+			);
+			path = Bills;
+			sourceTree = "<group>";
+		};
+		CE9AE1F9055B466FC169CCFD /* Compare */ = {
+			isa = PBXGroup;
+			children = (
+				05C5D989EC6C1B2E4AB28707 /* CompareView.swift */,
+			);
+			path = Compare;
+			sourceTree = "<group>";
+		};
+		D08039A66FF9493E357E6777 /* Kilowatch */ = {
+			isa = PBXGroup;
+			children = (
+				B81BF90505464ED693753DED /* Info.plist */,
+				0CF352D07E5347FDC7E6C7A0 /* App */,
+				0B97136D8CF5E53F138763F4 /* Features */,
+				B443471BC9BE343270D03A19 /* Models */,
+				3BEAE78B29E40FF7DAB58934 /* Services */,
+				0C47242FA813FA60AFB2616C /* Support */,
+			);
+			path = Kilowatch;
+			sourceTree = "<group>";
+		};
+		D56A2DDA08BCF6258E00D736 /* KilowatchTests */ = {
+			isa = PBXGroup;
+			children = (
+				673389571FA14BB6195A9701 /* BillExplainerTests.swift */,
+			);
+			path = KilowatchTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		85CB75037AFE8440833193D4 /* Kilowatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92DCFDCD424F7AC4BCCD2329 /* Build configuration list for PBXNativeTarget "Kilowatch" */;
+			buildPhases = (
+				6F8A13C613ECB6DC6B162624 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kilowatch;
+			packageProductDependencies = (
+			);
+			productName = Kilowatch;
+			productReference = 46ADEF9DAD615504569853C2 /* Kilowatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CE791F8AC8D0FF599CE9D9A1 /* KilowatchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 593FECEC08D21F1BF88F3F26 /* Build configuration list for PBXNativeTarget "KilowatchTests" */;
+			buildPhases = (
+				E625CA328688AEBE60533D9D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2917B4CC625A669414818EBD /* PBXTargetDependency */,
+			);
+			name = KilowatchTests;
+			packageProductDependencies = (
+			);
+			productName = KilowatchTests;
+			productReference = 1F065BA4366AB18070437019 /* KilowatchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B9D0A884EB249DC9D76F50AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = 25B33ACFF565C919667DCEE8 /* Build configuration list for PBXProject "Kilowatch" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = A59FC3278570C59F0C7BC989;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				85CB75037AFE8440833193D4 /* Kilowatch */,
+				CE791F8AC8D0FF599CE9D9A1 /* KilowatchTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6F8A13C613ECB6DC6B162624 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				864D845DAA3FF3438677237C /* AppModel.swift in Sources */,
+				61B8974EAC19A1833FBCE01E /* Bill.swift in Sources */,
+				18709EB19CA58CE284FA3456 /* BillDetailView.swift in Sources */,
+				920156AB55E6ABED4B740380 /* BillsListView.swift in Sources */,
+				059AB9BC47089C4DAA41C77F /* CompareView.swift in Sources */,
+				F3426059E2A2F31DAB21BAF6 /* Comparison.swift in Sources */,
+				88CCB65E02EFCE72F94871BD /* ComparisonService.swift in Sources */,
+				93D203C5DC2AA05CE3982EA0 /* ConnectAccountView.swift in Sources */,
+				43A940CAD4277875C5DC287A /* DashboardView.swift in Sources */,
+				3F38920BE2747D54E648D743 /* Formatters.swift in Sources */,
+				9872B476DB63EA4569DDA28B /* Insight.swift in Sources */,
+				08D385638E78922B57067B07 /* KilowatchApp.swift in Sources */,
+				FF80BD186F7EC84CD2834825 /* RootView.swift in Sources */,
+				04494FF648975A3B278F2F72 /* SampleData.swift in Sources */,
+				4B968206DB76981513087F94 /* SettingsView.swift in Sources */,
+				FC522383EA3C09E2A4592F52 /* UsageInterval.swift in Sources */,
+				D61914F58C41196C1B2EBEAB /* UtilityAccount.swift in Sources */,
+				8BAEB15558E58823341F3E06 /* UtilityDataProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E625CA328688AEBE60533D9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38974F46782A8363927902FD /* BillExplainerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2917B4CC625A669414818EBD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85CB75037AFE8440833193D4 /* Kilowatch */;
+			targetProxy = 79DCB2EF8A79545F8D1D0CBB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DA8604EE00137AD5F749870 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Kilowatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwaxman.kilowatch;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		98DEF125D1DC9218F5C807F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Kilowatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwaxman.kilowatch;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A795BB485C9F2AF5E1EC1C64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		E607770F913B21BCF2FE2E54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwaxman.KilowatchTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kilowatch.app/Kilowatch";
+			};
+			name = Debug;
+		};
+		E9B71673FDFD2A1F05BFF213 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.elliotwaxman.KilowatchTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kilowatch.app/Kilowatch";
+			};
+			name = Release;
+		};
+		F3A4E868696CBFC04CE83D40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		25B33ACFF565C919667DCEE8 /* Build configuration list for PBXProject "Kilowatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3A4E868696CBFC04CE83D40 /* Debug */,
+				A795BB485C9F2AF5E1EC1C64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		593FECEC08D21F1BF88F3F26 /* Build configuration list for PBXNativeTarget "KilowatchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E607770F913B21BCF2FE2E54 /* Debug */,
+				E9B71673FDFD2A1F05BFF213 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		92DCFDCD424F7AC4BCCD2329 /* Build configuration list for PBXNativeTarget "Kilowatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				98DEF125D1DC9218F5C807F6 /* Debug */,
+				1DA8604EE00137AD5F749870 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B9D0A884EB249DC9D76F50AF /* Project object */;
+}
