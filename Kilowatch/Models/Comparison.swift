@@ -37,7 +37,7 @@ struct CohortComparison: Codable, Equatable {
 /// A friend who has opted in to comparing with you. Both sides must consent.
 /// By default only the relative difference is shared, never the raw number.
 struct FriendComparison: Identifiable, Codable, Equatable {
-    let id: UUID
+    let id: String
     let displayName: String
     /// Their usage relative to yours, normalized per bedroom. +0.15 means they use 15% more.
     let deltaFromYou: Double
@@ -50,4 +50,8 @@ struct PrivacySettings: Codable, Equatable {
     var visibleToFriends = true
     var shareExactUsageWithFriends = false
     var homeProfile = HomeProfile()
+    /// What friends see. Never shown to neighbors.
+    var displayName = ""
+    /// Overrides the ZIP parsed from the service address, when that is missing or wrong.
+    var zipOverride = ""
 }

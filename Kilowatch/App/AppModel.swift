@@ -16,8 +16,14 @@ final class AppModel: ObservableObject {
     @Published private(set) var neighborComparison: CohortComparison?
     @Published private(set) var friendComparisons: [FriendComparison] = []
     @Published private(set) var isRefreshing = false
-    @Published var privacy = PrivacySettings() {
-        didSet { Task { await pushPrivacy() } }
+    /// Non-nil when the last comparison fetch failed. Bills still show.
+    @Published private(set) var comparisonError: String?
+    @Published private(set) var usingSampleComparisons = false
+    @Published var privacy: PrivacySettings {
+        didSet {
+            Self.savePrivacy(privacy)
+            Task { await pushPrivacy() }
+        }
     }
     /// Set when a Green Button import fails; the UI shows it in an alert.
     @Published var importError: String?
@@ -25,19 +31,27 @@ final class AppModel: ObservableObject {
 
     private var utility: UtilityDataProvider
     private let defaultUtility: UtilityDataProvider
-    private let comparisons: ComparisonService
+    private var comparisons: ComparisonService
+    private let sampleComparisons: ComparisonService
+    private let remoteComparisons: ComparisonService?
 
     init(utility: UtilityDataProvider = MockUtilityDataProvider(),
          comparisons: ComparisonService = MockComparisonService(),
+         remote: ComparisonService? = APIConfig.baseURL.map { RemoteComparisonService(baseURL: $0) },
          restoreImport: Bool = true) {
         self.utility = utility
         self.defaultUtility = utility
         self.comparisons = comparisons
+        self.sampleComparisons = comparisons
+        self.remoteComparisons = remote
+        self.privacy = Self.loadPrivacy()
         if restoreImport, let saved = ImportStore.load() {
             adopt(saved)
             Task { await refresh() }
         }
     }
+
+    // MARK: Derived
 
     var account: UtilityAccount? {
         if case .linked(let account) = linkState { return account }
@@ -47,6 +61,15 @@ final class AppModel: ObservableObject {
     /// Bills newest first.
     var sortedBills: [Bill] { bills.sorted { $0.periodEnd > $1.periodEnd } }
     var currentBill: Bill? { sortedBills.first }
+
+    /// The ZIP reported to the comparison service.
+    var effectiveZip: String {
+        let override = privacy.zipOverride.trimmingCharacters(in: .whitespaces)
+        if override.count == 5 { return override }
+        return account?.zip ?? ""
+    }
+
+    var hasRemoteComparisons: Bool { remoteComparisons != nil }
 
     func previousBill(before bill: Bill) -> Bill? {
         sortedBills.first { $0.periodEnd < bill.periodEnd }
@@ -64,8 +87,13 @@ final class AppModel: ObservableObject {
                                lastYear: billOneYearBefore(bill))
     }
 
+    // MARK: Data sources
+
+    /// Sample-data mode: canned bills and canned comparisons, nothing sent anywhere.
     func linkAccount() async {
         linkState = .linking
+        comparisons = sampleComparisons
+        usingSampleComparisons = true
         do {
             let account = try await utility.linkAccount()
             linkState = .linked(account)
@@ -101,18 +129,31 @@ final class AppModel: ObservableObject {
         utility = provider
         importedFile = imported
         linkState = .linked(provider.account)
+        // Real data gets real comparisons when a backend is configured.
+        if let remote = remoteComparisons {
+            comparisons = remote
+            usingSampleComparisons = false
+        } else {
+            comparisons = sampleComparisons
+            usingSampleComparisons = true
+        }
     }
 
     func unlinkAccount() async {
         if let account { try? await utility.unlink(account) }
+        if !usingSampleComparisons { try? await comparisons.deleteAccount() }
         utility = defaultUtility
+        comparisons = sampleComparisons
         importedFile = nil
         linkState = .notLinked
         bills = []
         dailyUsage = []
         neighborComparison = nil
         friendComparisons = []
+        comparisonError = nil
     }
+
+    // MARK: Refresh
 
     func refresh() async {
         guard let account else { return }
@@ -121,27 +162,60 @@ final class AppModel: ObservableObject {
         do {
             bills = try await utility.fetchBills(for: account)
             dailyUsage = try await utility.fetchDailyUsage(for: account, days: 30)
-            if let current = currentBill {
-                if privacy.contributeToNeighborCohort {
-                    neighborComparison = try await comparisons.neighborComparison(
-                        yourKWh: current.kWh, zip: account.zip, profile: privacy.homeProfile)
-                } else {
-                    neighborComparison = nil
-                }
-                if privacy.visibleToFriends {
-                    friendComparisons = try await comparisons.friendComparisons(yourKWh: current.kWh)
-                } else {
-                    friendComparisons = []
-                }
-            }
         } catch {
-            // Keep stale data on screen; surface the error non-destructively.
-            linkState = .linked(account)
+            linkState = .linked(account) // keep stale data on screen
+        }
+        await refreshComparisons()
+    }
+
+    func refreshComparisons() async {
+        guard let current = currentBill else {
+            neighborComparison = nil
+            friendComparisons = []
+            return
+        }
+        comparisonError = nil
+        do {
+            try await comparisons.updateProfile(zip: effectiveZip, settings: privacy)
+            try await comparisons.syncUsage(bills)
+            let result = try await comparisons.comparison(for: current)
+            neighborComparison = privacy.contributeToNeighborCohort ? result.neighbors : nil
+            friendComparisons = privacy.visibleToFriends ? result.friends : []
+        } catch {
+            comparisonError = error.localizedDescription
         }
     }
 
     private func pushPrivacy() async {
-        try? await comparisons.updatePrivacy(privacy)
-        await refresh()
+        await refreshComparisons()
+    }
+
+    // MARK: Friends
+
+    func createInvite() async throws -> String {
+        try await comparisons.createInvite()
+    }
+
+    /// Returns the new friend's name.
+    func acceptInvite(code: String) async throws -> String {
+        let name = try await comparisons.acceptInvite(code: code)
+        await refreshComparisons()
+        return name
+    }
+
+    // MARK: Settings persistence
+
+    private static let privacyKey = "privacySettings"
+
+    private static func loadPrivacy() -> PrivacySettings {
+        guard let data = UserDefaults.standard.data(forKey: privacyKey),
+              let decoded = try? JSONDecoder().decode(PrivacySettings.self, from: data) else { return PrivacySettings() }
+        return decoded
+    }
+
+    private static func savePrivacy(_ settings: PrivacySettings) {
+        if let data = try? JSONEncoder().encode(settings) {
+            UserDefaults.standard.set(data, forKey: privacyKey)
+        }
     }
 }

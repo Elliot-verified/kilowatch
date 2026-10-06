@@ -13,6 +13,7 @@
 		09D39A802B669EA1E071E60F /* GreenButtonImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F4D2E9B29A0409D255645 /* GreenButtonImport.swift */; };
 		0E95544DD4144153AA498E3B /* ConEdRateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A779E9CC265E3C431B4F8A4 /* ConEdRateModel.swift */; };
 		1759EE32243D388F82980CD0 /* ImportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7455BC299E2C4851E77C23E8 /* ImportStore.swift */; };
+		177EE693082D3A2650218637 /* RemoteComparisonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55E525E17F6D532F08FD51 /* RemoteComparisonService.swift */; };
 		18709EB19CA58CE284FA3456 /* BillDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F524374EE8D7628679F508 /* BillDetailView.swift */; };
 		1A707ECCA8C593253379A517 /* GreenButtonXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7177941BA8C23A49ED7F7227 /* GreenButtonXMLParser.swift */; };
 		38974F46782A8363927902FD /* BillExplainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673389571FA14BB6195A9701 /* BillExplainerTests.swift */; };
@@ -29,6 +30,7 @@
 		9872B476DB63EA4569DDA28B /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1115F019B83691C679F119 /* Insight.swift */; };
 		A00CE504A8E806453FD3A032 /* GreenButtonParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFDA9A7B610AA6576DFAD63 /* GreenButtonParserTests.swift */; };
 		D61914F58C41196C1B2EBEAB /* UtilityAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FFF6B186116E9E4815A882 /* UtilityAccount.swift */; };
+		DAA56F766181D8CFC03E6DCC /* RemoteComparisonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E89DD0676210977880EEF09 /* RemoteComparisonTests.swift */; };
 		F3426059E2A2F31DAB21BAF6 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCC867299F1AB1F3465595B /* Comparison.swift */; };
 		F4A64392E117874405B4821D /* BillBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0000E21C7A909CBA83F81 /* BillBuilder.swift */; };
 		FC522383EA3C09E2A4592F52 /* UsageInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA97A771B98912C6B264077B /* UsageInterval.swift */; };
@@ -58,11 +60,13 @@
 		4A779E9CC265E3C431B4F8A4 /* ConEdRateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConEdRateModel.swift; sourceTree = "<group>"; };
 		5D560D63A7970FDA51F61395 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		673389571FA14BB6195A9701 /* BillExplainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillExplainerTests.swift; sourceTree = "<group>"; };
+		6E55E525E17F6D532F08FD51 /* RemoteComparisonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteComparisonService.swift; sourceTree = "<group>"; };
 		7177941BA8C23A49ED7F7227 /* GreenButtonXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButtonXMLParser.swift; sourceTree = "<group>"; };
 		7455BC299E2C4851E77C23E8 /* ImportStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportStore.swift; sourceTree = "<group>"; };
 		7CFEDAA16FCAC08618D35A57 /* BillsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsListView.swift; sourceTree = "<group>"; };
 		8A22043AC7C296C146FA03F8 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		8D493522FDF7658AC7189C58 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		8E89DD0676210977880EEF09 /* RemoteComparisonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteComparisonTests.swift; sourceTree = "<group>"; };
 		A17EBB47E628281D42CC3E3D /* ComparisonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonService.swift; sourceTree = "<group>"; };
 		B81BF90505464ED693753DED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BCCC867299F1AB1F3465595B /* Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 			children = (
 				A17EBB47E628281D42CC3E3D /* ComparisonService.swift */,
 				D2017D45B303C27EEFA72904 /* ImportedUtilityDataProvider.swift */,
+				6E55E525E17F6D532F08FD51 /* RemoteComparisonService.swift */,
 				CA056EF2FB8C1622BDCBE0A7 /* UtilityDataProvider.swift */,
 				A5840CEC0EA8E20363FF064C /* GreenButton */,
 			);
@@ -224,6 +229,7 @@
 			children = (
 				673389571FA14BB6195A9701 /* BillExplainerTests.swift */,
 				EAFDA9A7B610AA6576DFAD63 /* GreenButtonParserTests.swift */,
+				8E89DD0676210977880EEF09 /* RemoteComparisonTests.swift */,
 			);
 			path = KilowatchTests;
 			sourceTree = "<group>";
@@ -319,6 +325,7 @@
 				63965D67F30DFD3A776AEDD2 /* ImportedUtilityDataProvider.swift in Sources */,
 				9872B476DB63EA4569DDA28B /* Insight.swift in Sources */,
 				08D385638E78922B57067B07 /* KilowatchApp.swift in Sources */,
+				177EE693082D3A2650218637 /* RemoteComparisonService.swift in Sources */,
 				FF80BD186F7EC84CD2834825 /* RootView.swift in Sources */,
 				04494FF648975A3B278F2F72 /* SampleData.swift in Sources */,
 				4B968206DB76981513087F94 /* SettingsView.swift in Sources */,
@@ -334,6 +341,7 @@
 			files = (
 				38974F46782A8363927902FD /* BillExplainerTests.swift in Sources */,
 				A00CE504A8E806453FD3A032 /* GreenButtonParserTests.swift in Sources */,
+				DAA56F766181D8CFC03E6DCC /* RemoteComparisonTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

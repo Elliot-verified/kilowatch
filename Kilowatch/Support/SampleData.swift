@@ -70,8 +70,8 @@ enum SampleData {
     }
 
     static let friends: [FriendComparison] = [
-        FriendComparison(id: UUID(), displayName: "Priya", deltaFromYou: -0.22, sharesExactUsage: true, kWh: 245),
-        FriendComparison(id: UUID(), displayName: "Marcus", deltaFromYou: 0.08, sharesExactUsage: false, kWh: nil),
-        FriendComparison(id: UUID(), displayName: "Dana", deltaFromYou: -0.05, sharesExactUsage: false, kWh: nil),
+        FriendComparison(id: "sample-priya", displayName: "Priya", deltaFromYou: -0.22, sharesExactUsage: true, kWh: 245),
+        FriendComparison(id: "sample-marcus", displayName: "Marcus", deltaFromYou: 0.08, sharesExactUsage: false, kWh: nil),
+        FriendComparison(id: "sample-dana", displayName: "Dana", deltaFromYou: -0.05, sharesExactUsage: false, kWh: nil),
     ]
 }

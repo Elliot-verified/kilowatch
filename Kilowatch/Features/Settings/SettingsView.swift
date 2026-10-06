@@ -42,6 +42,11 @@ struct SettingsView: View {
             }
 
             Section {
+                TextField("ZIP code", text: $model.privacy.zipOverride)
+                    .keyboardType(.numberPad)
+                if model.privacy.zipOverride.isEmpty, let zip = model.account?.zip, !zip.isEmpty {
+                    LabeledContent("From your address", value: zip)
+                }
                 Picker("Home type", selection: $model.privacy.homeProfile.homeType) {
                     ForEach(HomeType.allCases) { Text($0.title).tag($0) }
                 }
@@ -56,6 +61,7 @@ struct SettingsView: View {
             }
 
             Section {
+                TextField("Name friends see", text: $model.privacy.displayName)
                 Toggle("Compare with similar homes", isOn: $model.privacy.contributeToNeighborCohort)
                 Toggle("Let friends compare with me", isOn: $model.privacy.visibleToFriends)
                 Toggle("Show friends my exact usage", isOn: $model.privacy.shareExactUsageWithFriends)
@@ -63,7 +69,7 @@ struct SettingsView: View {
             } header: {
                 Text("Privacy")
             } footer: {
-                Text("Neighbor comparisons are anonymous and only shown for groups of 20 or more homes. Friend comparisons require both people to opt in.")
+                Text("Neighbor comparisons are anonymous and only shown for groups of 20 or more homes. Friend comparisons require both people to opt in. Turning both off deletes your usage from the comparison service.")
             }
         }
         .navigationTitle("Settings")

@@ -6,21 +6,38 @@ struct CompareView: View {
 
     var body: some View {
         List {
+            if model.usingSampleComparisons {
+                Section {
+                    Label("These are sample neighbors and friends. Import your Green Button data to compare for real.",
+                          systemImage: "info.circle")
+                        .font(.footnote).foregroundStyle(.secondary)
+                }
+            } else if let error = model.comparisonError {
+                Section {
+                    Label(error, systemImage: "wifi.exclamationmark")
+                        .font(.footnote).foregroundStyle(.secondary)
+                    Button("Try again") { Task { await model.refreshComparisons() } }
+                }
+            }
+
             Section("Neighbors") {
                 if let comparison = model.neighborComparison {
                     NeighborComparisonCard(comparison: comparison)
                 } else if !model.privacy.contributeToNeighborCohort {
                     Text("Neighbor comparison is off. Turn on \"Compare with similar homes\" in Settings to see it.")
                         .font(.footnote).foregroundStyle(.secondary)
+                } else if model.effectiveZip.count != 5 {
+                    Text("Add your ZIP code in Settings so we can find similar homes nearby.")
+                        .font(.footnote).foregroundStyle(.secondary)
                 } else {
-                    Text("Not enough similar homes nearby yet. We only show comparisons once a cohort has at least 20 households.")
+                    Text("Not enough similar homes nearby yet. Comparisons appear once at least 20 households in your area have joined, and they refresh every few hours.")
                         .font(.footnote).foregroundStyle(.secondary)
                 }
             }
 
             Section {
                 if model.friendComparisons.isEmpty {
-                    Text("No friends yet. Invite someone and, once you both opt in, you'll each see how you compare.")
+                    Text("No friends yet. Share an invite code and, once you both opt in, you'll each see how you compare.")
                         .font(.footnote).foregroundStyle(.secondary)
                 } else {
                     ForEach(model.friendComparisons) { FriendRow(friend: $0) }
@@ -28,7 +45,7 @@ struct CompareView: View {
                 Button {
                     showingInvite = true
                 } label: {
-                    Label("Invite a friend", systemImage: "person.badge.plus")
+                    Label("Invite or add a friend", systemImage: "person.badge.plus")
                 }
             } header: {
                 Text("Friends")
@@ -37,6 +54,7 @@ struct CompareView: View {
             }
         }
         .navigationTitle("Compare")
+        .refreshable { await model.refreshComparisons() }
         .sheet(isPresented: $showingInvite) { InviteFriendSheet() }
     }
 }
@@ -96,16 +114,18 @@ struct UsageScale: View {
             ZStack(alignment: .leading) {
                 Capsule().fill(.quaternary).frame(height: 12).frame(maxHeight: .infinity)
                 Capsule().fill(.yellow).frame(width: x(you), height: 12).frame(maxHeight: .infinity)
-                marker(at: x(efficient), color: .green, label: "Efficient")
-                marker(at: x(median), color: .secondary, label: "Typical")
+                // Labels sit on opposite sides of the bar so they never collide.
+                marker(at: x(efficient), color: .green, label: "Efficient", labelAbove: true)
+                marker(at: x(median), color: .secondary, label: "Typical", labelAbove: false)
             }
         }
     }
 
-    private func marker(at x: CGFloat, color: Color, label: String) -> some View {
+    private func marker(at x: CGFloat, color: Color, label: String, labelAbove: Bool) -> some View {
         VStack(spacing: 2) {
-            Text(label).font(.caption2).foregroundStyle(color)
+            if labelAbove { Text(label).font(.caption2).foregroundStyle(color) }
             Rectangle().fill(color).frame(width: 2, height: 28)
+            if !labelAbove { Text(label).font(.caption2).foregroundStyle(color) }
         }
         .fixedSize()
         .position(x: x, y: 32)
@@ -137,25 +157,73 @@ struct FriendRow: View {
 }
 
 struct InviteFriendSheet: View {
+    @EnvironmentObject private var model: AppModel
     @Environment(\.dismiss) private var dismiss
+    @State private var myCode: String?
+    @State private var enteredCode = ""
+    @State private var status: String?
+    @State private var busy = false
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                Image(systemName: "person.2.wave.2").font(.system(size: 56)).foregroundStyle(.tint)
-                Text("Compare with a friend").font(.title2.bold())
-                Text("Send an invite link. When they link their Con Edison account and accept, you'll both see how your usage compares, adjusted for home size.")
-                    .multilineTextAlignment(.center).foregroundStyle(.secondary)
-                ShareLink(item: URL(string: "https://kilowatch.app/invite/demo")!) {
-                    Label("Share invite link", systemImage: "square.and.arrow.up")
-                        .frame(maxWidth: .infinity).padding()
+            Form {
+                Section {
+                    if let code = myCode {
+                        HStack {
+                            Text(code).font(.title2.monospaced().bold())
+                            Spacer()
+                            ShareLink(item: "Compare electricity use with me on Kilowatch. My invite code is \(code).") {
+                                Label("Share", systemImage: "square.and.arrow.up")
+                            }
+                        }
+                    } else {
+                        Button {
+                            Task {
+                                busy = true; defer { busy = false }
+                                do { myCode = try await model.createInvite(); status = nil }
+                                catch { status = error.localizedDescription }
+                            }
+                        } label: {
+                            HStack { if busy { ProgressView() }; Text("Get my invite code") }
+                        }
+                        .disabled(busy)
+                    }
+                } header: {
+                    Text("Invite a friend")
+                } footer: {
+                    Text("Codes work for 14 days and once each. Your friend enters it below on their phone.")
                 }
-                .buttonStyle(.borderedProminent)
-                Spacer()
+
+                Section {
+                    TextField("K7M3-PX9Q", text: $enteredCode)
+                        .textInputAutocapitalization(.characters)
+                        .autocorrectionDisabled()
+                        .font(.body.monospaced())
+                    Button("Add friend") {
+                        Task {
+                            busy = true; defer { busy = false }
+                            do {
+                                let name = try await model.acceptInvite(code: enteredCode)
+                                status = "You and \(name) are now comparing."
+                                enteredCode = ""
+                            } catch {
+                                status = error.localizedDescription
+                            }
+                        }
+                    }
+                    .disabled(busy || enteredCode.trimmingCharacters(in: .whitespaces).count < 8)
+                } header: {
+                    Text("Have a friend's code?")
+                }
+
+                if let status {
+                    Section { Text(status).font(.footnote) }
+                }
             }
-            .padding()
+            .navigationTitle("Friends")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Done") { dismiss() } } }
         }
-        .presentationDetents([.medium])
+        .presentationDetents([.large])
     }
 }
