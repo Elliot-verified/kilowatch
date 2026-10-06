@@ -37,7 +37,8 @@ async function blobStore(): Promise<Store> {
 
   async function readJSON<T>(pathname: string): Promise<T | null> {
     try {
-      const result = await get(pathname, ACCESS);
+      // useCache: false bypasses the CDN so reads see the latest write and deletes.
+      const result = await get(pathname, { ...ACCESS, useCache: false });
       if (!result || result.statusCode !== 200) return null;
       return JSON.parse(await new Response(result.stream).text()) as T;
     } catch (error: any) {
