@@ -37,13 +37,16 @@ iOS app (SwiftUI, iOS 17)
   ├─ Services/        UtilityDataProvider, ComparisonService (protocols + mocks)
   └─ App/             AppModel (single observable source of truth), RootView
 
-Kilowatch backend (not in this repo)
-  ├─ Utility data ingestion   Con Edison data-sharing authorization, bill + interval sync
-  ├─ Bill normalizer          maps Con Edison line items → ChargeCategory
-  └─ Comparison service       cohort aggregation with k-anonymity, friend graph, consent
+backend/ (deployed at https://kilowatch-api.vercel.app, Vercel project kilowatch-api)
+  ├─ api/                     Vercel Functions: register, me, usage, comparison, invites, cron
+  ├─ lib/cohorts.ts           cohort aggregation, k-anonymity (20 households), fallback cohorts
+  ├─ lib/friends.ts           mutual opt-in friend comparison rules
+  └─ lib/store.ts             private Vercel Blob store (or in-memory for tests)
 ```
 
-The app currently runs entirely on `MockUtilityDataProvider` and `MockComparisonService`, which return deterministic sample data shaped like a real Brooklyn apartment account. Swapping in real implementations is the only change needed to go live; the views don't know the difference.
+The backend deploys automatically from `backend/` on every push to `main`. Cohorts recompute daily at 09:00 UTC (Vercel Hobby allows one cron run per day). See `backend/README.md` for the API.
+
+Sample-data mode runs on `MockUtilityDataProvider` and `MockComparisonService`. With an imported Green Button file, usage comes from `ImportedUtilityDataProvider` and comparisons from `RemoteComparisonService`, which talks to the backend. The API base URL is `KilowatchAPIBaseURL` in Info.plist (set in `project.yml`); a launch argument of the same name overrides it for local testing against `npm run dev` in `backend/`.
 
 ### Getting Con Edison data
 Con Edison has no public API for customers. The options:
