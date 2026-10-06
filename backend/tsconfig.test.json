@@ -8,7 +8,9 @@
     "target": "ES2022"
   },
   "include": [
+    "api/**/*.ts",
     "lib/**/*.ts",
+    "scripts/**/*.ts",
     "tests/**/*.ts"
   ]
 }

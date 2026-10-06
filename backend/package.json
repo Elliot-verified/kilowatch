@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "tsc -p tsconfig.test.json && node --test .test-build/tests/*.test.js"
+    "test": "tsc -p tsconfig.test.json && node --test .test-build/tests/*.test.js",
+    "dev": "tsc -p tsconfig.test.json && KILOWATCH_STORE=memory CRON_SECRET=dev node .test-build/scripts/dev-server.js"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0"
