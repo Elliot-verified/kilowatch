@@ -4,7 +4,7 @@ The comparison service for the Kilowatch iOS app. Vercel Functions (Node) with a
 
 ## What it does
 
-- **Neighbor cohorts.** Users who opt in submit kWh per billing period plus a ZIP and home profile. A cron job every six hours groups them into cohorts (ZIP, home type, bedrooms, electric heat) and publishes only quantiles for cohorts with at least 20 households. Smaller cohorts fall back to broader ones (same ZIP, then nearby ZIPs).
+- **Neighbor cohorts.** Users who opt in submit kWh per billing period plus a ZIP and home profile. A daily cron job (09:00 UTC; Hobby plan allows once a day) groups them into cohorts (ZIP, home type, bedrooms, electric heat) and publishes only quantiles for cohorts with at least 20 households. Smaller cohorts fall back to broader ones (same ZIP, then nearby ZIPs).
 - **Friends.** Mutual opt-in through a short invite code. A friend sees the percentage difference, normalized per bedroom. Exact kWh only if that friend turned it on.
 - **Deletion.** `DELETE /api/me` erases the user and unlinks them from friends.
 

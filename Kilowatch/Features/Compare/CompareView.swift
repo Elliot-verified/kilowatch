@@ -30,7 +30,7 @@ struct CompareView: View {
                     Text("Add your ZIP code in Settings so we can find similar homes nearby.")
                         .font(.footnote).foregroundStyle(.secondary)
                 } else {
-                    Text("Not enough similar homes nearby yet. Comparisons appear once at least 20 households in your area have joined, and they refresh every few hours.")
+                    Text("Not enough similar homes nearby yet. Comparisons appear once at least 20 households in your area have joined, and they refresh once a day.")
                         .font(.footnote).foregroundStyle(.secondary)
                 }
             }
