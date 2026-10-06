@@ -75,8 +75,8 @@ final class AppModel: ObservableObject {
         }
     }
 
-    /// Reads a Green Button file (CSV or ESPI XML) the user picked, and
-    /// switches the app to that data. Replaces any previous import.
+    /// Reads a Green Button file (CSV or ESPI XML) the user picked and merges
+    /// it with any earlier import, so several exports build up a full history.
     func importGreenButton(from url: URL) async {
         importError = nil
         let scoped = url.startAccessingSecurityScopedResource()
@@ -87,8 +87,9 @@ final class AppModel: ObservableObject {
             let parsed = try await Task.detached(priority: .userInitiated) {
                 try GreenButtonParser.parse(data: data, fileName: name)
             }.value
-            try ImportStore.save(parsed)
-            adopt(parsed)
+            let combined = importedFile.map { $0.merging(parsed) } ?? parsed
+            try ImportStore.save(combined)
+            adopt(combined)
             await refresh()
         } catch {
             importError = error.localizedDescription

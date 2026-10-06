@@ -8,32 +8,37 @@ struct SettingsView: View {
     var body: some View {
         Form {
             if let account = model.account {
-                Section("Linked account") {
-                    LabeledContent("Utility", value: account.utilityName)
-                    LabeledContent("Account", value: "•••• \(account.accountNumberLast4)")
-                    LabeledContent("Service address", value: account.serviceAddress)
-                    Button("Disconnect account", role: .destructive) { confirmingUnlink = true }
-                }
-            }
-
-            Section {
-                if let imported = model.importedFile {
-                    LabeledContent("File", value: imported.sourceFileName)
-                    if let first = imported.firstDate, let last = imported.lastDate {
-                        LabeledContent("Covers", value: "\(Formatters.shortDate(first)) – \(Formatters.shortDate(last))")
+                Section {
+                    LabeledContent("Source", value: model.importedFile == nil ? "Sample data" : "Green Button export")
+                    if model.importedFile != nil {
+                        LabeledContent("Account", value: "•••• \(account.accountNumberLast4)")
+                        LabeledContent("Service address", value: account.serviceAddress)
                     }
-                    LabeledContent("Readings", value: "\(imported.intervals.count)")
+                    if let imported = model.importedFile {
+                        if let first = imported.firstDate, let last = imported.lastDate {
+                            LabeledContent("Covers", value: "\(Formatters.shortDate(first)) – \(Formatters.shortDate(last))")
+                        }
+                        LabeledContent("Readings", value: "\(imported.intervals.count)")
+                        ForEach(imported.allFileNames, id: \.self) { name in
+                            Label(name, systemImage: "doc").foregroundStyle(.secondary).font(.subheadline)
+                        }
+                    }
+                    Button {
+                        showingImporter = true
+                    } label: {
+                        Label(model.importedFile == nil ? "Import a Green Button file" : "Import another export",
+                              systemImage: "square.and.arrow.down")
+                    }
+                    Button(model.importedFile == nil ? "Leave sample data" : "Remove my data", role: .destructive) {
+                        confirmingUnlink = true
+                    }
+                } header: {
+                    Text("Your data")
+                } footer: {
+                    Text(model.importedFile == nil
+                         ? "You're looking at a made-up Brooklyn apartment. Import a Green Button export from coned.com (Usage → Download My Data) to see your own usage."
+                         : "Exports merge, so import several to build up a full year. Green Button files contain usage, not line items, so charge breakdowns are estimated from Con Edison's standard residential rates.")
                 }
-                Button {
-                    showingImporter = true
-                } label: {
-                    Label(model.importedFile == nil ? "Import a Green Button file" : "Replace with another file",
-                          systemImage: "square.and.arrow.down")
-                }
-            } header: {
-                Text("Data")
-            } footer: {
-                Text("Download your usage from coned.com under Usage → Download My Data (CSV or XML). Green Button files contain usage, not line items, so charge breakdowns are estimated from Con Edison's standard residential rates.")
             }
 
             Section {
@@ -63,10 +68,13 @@ struct SettingsView: View {
         }
         .navigationTitle("Settings")
         .greenButtonImporter(isPresented: $showingImporter)
-        .confirmationDialog("Disconnect your Con Edison account?", isPresented: $confirmingUnlink, titleVisibility: .visible) {
-            Button("Disconnect", role: .destructive) { Task { await model.unlinkAccount() } }
+        .confirmationDialog(model.importedFile == nil ? "Leave sample data?" : "Remove your data from this phone?",
+                            isPresented: $confirmingUnlink, titleVisibility: .visible) {
+            Button(model.importedFile == nil ? "Leave" : "Remove", role: .destructive) { Task { await model.unlinkAccount() } }
         } message: {
-            Text("Kilowatch will delete your bills and usage data and stop syncing.")
+            Text(model.importedFile == nil
+                 ? "You'll go back to the start screen."
+                 : "Kilowatch will delete the imported usage from this phone. Your Con Edison account is not affected.")
         }
     }
 }

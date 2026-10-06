@@ -21,6 +21,9 @@ struct GreenButtonImport: Codable, Equatable {
     var summaries: [UsageSummary]
     var sourceFileName: String
     var importedAt: Date
+    /// Every file that has contributed to this import, oldest first. Optional
+    /// so earlier saved imports still decode.
+    var fileNames: [String]?
 
     init(customerName: String? = nil, serviceAddress: String? = nil, accountNumber: String? = nil,
          intervals: [UsageInterval] = [], summaries: [UsageSummary] = [],
@@ -32,6 +35,25 @@ struct GreenButtonImport: Codable, Equatable {
         self.summaries = summaries
         self.sourceFileName = sourceFileName
         self.importedAt = importedAt
+    }
+
+    var allFileNames: [String] { fileNames ?? [sourceFileName] }
+
+    /// Combines another export with this one. Overlapping intervals are
+    /// deduplicated by start time, with the newer file winning. Account details
+    /// come from the newer file when it has them.
+    func merging(_ other: GreenButtonImport) -> GreenButtonImport {
+        var merged = other
+        merged.customerName = other.customerName ?? customerName
+        merged.serviceAddress = other.serviceAddress ?? serviceAddress
+        merged.accountNumber = other.accountNumber ?? accountNumber
+        merged.intervals = GreenButtonParser.deduplicated(other.intervals + intervals)
+        var seenPeriods = Set<Date>()
+        merged.summaries = (other.summaries + summaries)
+            .filter { seenPeriods.insert($0.periodStart).inserted }
+            .sorted { $0.periodStart < $1.periodStart }
+        merged.fileNames = allFileNames.filter { $0 != other.sourceFileName } + [other.sourceFileName]
+        return merged
     }
 
     var totalKWh: Double { intervals.reduce(0) { $0 + $1.kWh } }

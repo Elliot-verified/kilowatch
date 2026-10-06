@@ -129,4 +129,18 @@ final class GreenButtonParserTests: XCTestCase {
         XCTAssertEqual(bills[0].periodStart, Date(timeIntervalSince1970: 1_698_796_800))
         XCTAssertTrue(bills[0].chargesAreEstimated)
     }
+
+    func testMergingTwoExportsDeduplicatesOverlap() throws {
+        let first = try GreenButtonParser.parse(data: Data(Self.conEdCSV.utf8), fileName: "spring.csv")
+        var laterCSV = "TYPE,DATE,START TIME,END TIME,USAGE,UNITS,COST,NOTES\n"
+        laterCSV += "Electric usage,2026-09-05,00:00,00:14,0.99,kWh,$0.30,\n"   // overlaps first file
+        laterCSV += "Electric usage,2026-09-07,,,11.0,kWh,$2.80,\n"            // new day
+        let second = try GreenButtonParser.parse(data: Data(laterCSV.utf8), fileName: "fall.csv")
+
+        let merged = first.merging(second)
+        XCTAssertEqual(merged.intervals.count, 5, "4 from the first file + 1 new; the overlap is not doubled")
+        XCTAssertEqual(merged.intervals.first?.kWh, 0.99, "newer file wins on overlap")
+        XCTAssertEqual(merged.serviceAddress, "214 7TH AVE APT 3B BROOKLYN NY 11215", "kept from the older file")
+        XCTAssertEqual(merged.allFileNames, ["spring.csv", "fall.csv"])
+    }
 }

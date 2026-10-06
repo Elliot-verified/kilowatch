@@ -9,7 +9,7 @@ New York City residents who get a Con Edison bill, don't understand why it chang
 
 ### Core flows
 
-1. **Connect** — One screen. The user taps "Connect Con Edison", signs in on Con Edison's own site, and grants Kilowatch read access to bills and meter data. Kilowatch never sees the password.
+1. **Get data** — One screen with the three steps to export a Green Button file from coned.com, an import button, and a sample-data mode for exploring the app first. There is no account linking and no server in this version; see "Getting Con Edison data" below for why. Several exports merge, so a user can build up a full year.
 2. **Home** — The current bill: total, change vs. last period, kWh, per-day usage, all-in price per kWh, and a stacked bar showing supply vs. delivery vs. taxes. Below it, a short list of "what changed" insights and a 30-day usage chart.
 3. **Bills** — Twelve months of bills as a stacked bar chart, then a list. Tapping a bill opens the breakdown.
 4. **Bill detail** — Every line item grouped into Supply, Delivery, Taxes & fees, and Adjustments. Each group expands to a plain-English explanation of what it is and whether the customer can do anything about it.
@@ -46,11 +46,11 @@ Kilowatch backend (not in this repo)
 The app currently runs entirely on `MockUtilityDataProvider` and `MockComparisonService`, which return deterministic sample data shaped like a real Brooklyn apartment account. Swapping in real implementations is the only change needed to go live; the views don't know the difference.
 
 ### Getting Con Edison data
-Con Edison has no public API for customers. Options, in order of preference:
+Con Edison has no public API for customers. The options:
 
-1. **Con Edison Share My Data (Green Button Connect My Data)** — the OAuth-style flow NY utilities offer to authorized third parties. Requires registering Kilowatch with Con Edison. Gives bills and 15-minute interval data without ever handling credentials. Needs verification of current program status and onboarding time.
-2. **Utility data aggregator** (UtilityAPI, Arcadia) — hosted connection to Con Edison, faster to launch, per-account cost.
-3. **Green Button Download My Data** — **built.** The user exports a file from coned.com (Usage → Download My Data) and imports it from the Connect screen or Settings. Works offline with no backend.
+1. **Green Button Download My Data** — **what v1 uses.** The user exports a file from coned.com (Usage → Download My Data) and imports it. Works offline with no backend.
+2. **Con Edison Share My Data (Green Button Connect My Data)** — OAuth 2.0 access for registered third parties, with 15-minute intervals, billing data, and two years of history, free of charge. Requires registering as a company, signing Con Edison's Data Security Agreement, and a 30–60 day technical onboarding against their test environment. Tokens and batch notifications need a server. Deferred: the parser already handles the ESPI XML it returns, so adding it later is server plumbing plus a new `UtilityDataProvider`.
+3. **Utility data aggregator** (UtilityAPI, Arcadia) — hosted connection to Con Edison, per-account cost. Also needs a server.
 
 ### Green Button import
 `Kilowatch/Services/GreenButton/` handles both export formats:
