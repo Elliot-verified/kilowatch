@@ -46,7 +46,7 @@ struct ConnectAccountView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     bullet("iphone", "Your file stays on this phone. Kilowatch has no server.")
                     bullet("square.stack.3d.up", "Import more than one export and they merge, so you can build up a full year.")
-                    bullet("eye.slash", "Comparisons are a preview with sample neighbors for now.")
+                    bullet("eye.slash", "Neighbor comparisons are anonymous and only appear once 20 similar homes nearby have joined.")
                 }
                 .padding(.horizontal, 28)
                 .font(.subheadline)
